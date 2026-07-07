@@ -1,0 +1,275 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+  <title>Faith Journey DGroup</title>
+  <meta name="theme-color" content="#eadfcd" />
+  <meta name="description" content="A private Christian prayer diary, reflection companion, and spiritual growth tracker." />
+  <link rel="manifest" href="manifest.json" />
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <section id="lockScreen" class="lock-screen">
+    <div class="lock-card">
+      <div class="logo-mark">✦</div>
+      <h1>Faith Journey<br>Diary + Gospel Monitoring</h1>
+      <p class="muted">Private prayer. Gentle reflection. Remembered grace.</p>
+
+      <div id="setupPanel">
+        <input id="nameInput" placeholder="Your name or signature, e.g., KC" />
+        <input id="pinSetupInput" type="password" inputmode="numeric" placeholder="Create private code" />
+        <button id="createVaultBtn">Create My Private Diary</button>
+      </div>
+
+      <div id="loginPanel" class="hidden">
+        <input id="pinInput" type="password" inputmode="numeric" placeholder="Enter private code" />
+        <button id="unlockBtn">Enter Diary</button>
+        <button id="resetVaultBtn" class="ghost">Reset local diary</button>
+      </div>
+
+      <small id="lockHint"></small>
+    </div>
+  </section>
+
+  <main id="app" class="app hidden">
+    <header class="hero">
+      <div>
+        <p class="eyebrow" id="greeting">Good day</p>
+        <h1>Faith Journey DGroup</h1>
+        <p class="subtitle">Private Diary + Gospel Sharing + Discipleship Monitoring</p>
+      </div>
+      <button id="lockBtn" class="round-btn" title="Lock">🔒</button>
+    </header>
+
+    <section class="daily-card">
+      <p class="eyebrow">Verse of the Day</p>
+      <h2 id="verseText"></h2>
+      <p id="verseRef"></p>
+      <button id="copyVerseBtn" class="mini-btn">Copy Verse</button>
+    </section>
+
+
+    <section class="panel covenant-card">
+      <p class="eyebrow">Care Covenant</p>
+      <h3>Private by default. Shared by consent.</h3>
+      <p class="muted">Your personal diary remains private on your device. Only prayer requests, testimonies, Gospel updates, or reflections you intentionally mark as shared should be visible to a DGroup leader in a future cloud version.</p>
+    </section>
+
+    <nav class="tabs" aria-label="Main navigation">
+      <button class="tab active" data-view="write">Write</button>
+      <button class="tab" data-view="history">History</button>
+      <button class="tab" data-view="gospel">Gospel</button>
+      <button class="tab" data-view="insights">Insights</button>
+      <button class="tab" data-view="prayers">Prayer</button>
+      <button class="tab" data-view="support">AI Support</button>
+      <button class="tab" data-view="settings">Settings</button>
+    </nav>
+
+    <section id="write" class="view active">
+      <article class="panel soft">
+        <div class="panel-head">
+          <h3>Before You Write</h3>
+          <button id="breathBtn" class="mini-btn">60-sec Breath Prayer</button>
+        </div>
+        <p id="breathLine">Be still. God is near.</p>
+        <div id="breathCircle" class="breath-circle">Start</div>
+      </article>
+
+      <article class="panel">
+        <label>Mood Tag</label>
+        <div id="moodPicker" class="mood-picker"></div>
+
+        <label for="entryText">Dear God,</label>
+        <textarea id="entryText" rows="11"></textarea>
+
+        <div class="quick-actions">
+          <button data-insert="🙏 Prayer Request: ">+ Prayer</button>
+          <button data-insert="🌿 Gratitude: ">+ Gratitude</button>
+          <button data-insert="✨ Answered Prayer: ">+ Answered</button>
+          <button data-insert="📖 Verse / Lesson: ">+ Verse</button>
+          <label class="share-toggle"><input id="sharePrayerToggle" type="checkbox"> Mark shareable prayer/testimony</label>
+        </div>
+
+        <button id="saveEntryBtn" class="primary">Submit Entry & Receive Comfort</button>
+      </article>
+
+      <article id="aiResponseCard" class="panel companion hidden">
+        <p class="eyebrow">Comfort Reflection</p>
+        <div id="aiResponse"></div>
+        <div class="button-row">
+          <button id="readAloudBtn" class="secondary">Read Aloud</button>
+          <button id="saveFavoriteBtn" class="secondary">Save as Favorite</button>
+        </div>
+      </article>
+    </section>
+
+
+    <section id="gospel" class="view">
+
+      <article class="panel">
+        <p class="eyebrow">Leader Analytics</p>
+        <h3>DGroup Dashboard</h3>
+        <div class="dashboard-grid">
+          <div class="dash-card"><span id="totalContacts">0</span><small>Total Contacts</small></div>
+          <div class="dash-card"><span id="activeFollowups">0</span><small>Active Follow-ups</small></div>
+          <div class="dash-card"><span id="overdueFollowups">0</span><small>Overdue</small></div>
+          <div class="dash-card"><span id="multipliersCount">0</span><small>Multipliers</small></div>
+        </div>
+        <div id="pipelineBars" class="pipeline-bars"></div>
+      </article>
+
+      <article class="panel">
+        <p class="eyebrow">DGroup Monitoring</p>
+        <h3>Gospel & Discipleship Tracker</h3>
+        <p class="muted legal-note">Use this for discipleship care, not surveillance. Keep notes respectful, necessary, and ministry-related. Avoid sensitive personal details unless the person gave permission to record them.</p>
+        <p class="muted">Track people you are praying for, sharing the Gospel with, following up, discipling, and helping grow as multipliers.</p>
+
+        <label>Contact Name</label>
+        <input id="gospelName" placeholder="Name or initials" />
+
+        <label>Spiritual Journey Stage</label>
+        <select id="gospelStage">
+          <option value="1">Stage 1: Seed Planted / Evangelized</option>
+          <option value="2">Stage 2: Decision / Accepted Christ or Open for Follow-up</option>
+          <option value="3">Stage 3: Foundation / Regular 1-on-1 Bible Study</option>
+          <option value="4">Stage 4: Community / Small Group or Attending Church</option>
+          <option value="5">Stage 5: Multiplier / Leading or Evangelizing Others</option>
+        </select>
+
+        <label>Topics Discussed</label>
+        <textarea id="gospelTopics" rows="4" placeholder="Gospel conversation, questions, Bible passage, concerns..."></textarea>
+
+        <label>Prayer Requests</label>
+        <textarea id="gospelPrayer" rows="3" placeholder="What can the group pray for?"></textarea>
+
+        <label>Next Follow-up Schedule</label>
+        <input id="gospelNext" type="date" />
+
+        <button id="saveGospelBtn" class="primary">Save Gospel Interaction</button>
+      </article>
+
+      <div class="stats-grid gospel-stats">
+        <div class="stat"><span id="stage1Count">0</span><small>Seed</small></div>
+        <div class="stat"><span id="stage2Count">0</span><small>Decision</small></div>
+        <div class="stat"><span id="stage3Count">0</span><small>Foundation</small></div>
+        <div class="stat"><span id="stage4Count">0</span><small>Community</small></div>
+        <div class="stat"><span id="stage5Count">0</span><small>Multiplier</small></div>
+      </div>
+
+      <article class="panel">
+        <h3>Urgent Care Alerts</h3>
+        <p class="muted">People with no interaction for more than 14 days will appear here.</p>
+        <div id="urgentCareList"></div>
+      </article>
+
+      <article class="panel">
+        <h3>Contacts Pipeline</h3>
+        <div id="gospelList"></div>
+      </article>
+    </section>
+
+    <section id="history" class="view">
+      <article class="panel">
+        <h3>Search Your Journey</h3>
+        <div class="filters">
+          <input id="searchInput" placeholder="Keyword, prayer, theme..." />
+          <select id="moodFilter"><option value="">All moods</option></select>
+          <input id="dateFrom" type="date" />
+          <input id="dateTo" type="date" />
+        </div>
+      </article>
+      <div id="timeline" class="timeline"></div>
+    </section>
+
+    <section id="insights" class="view">
+      <div class="stats-grid">
+        <div class="stat"><span id="totalEntries">0</span><small>Entries</small></div>
+        <div class="stat"><span id="streakDays">0</span><small>Day streak</small></div>
+        <div class="stat"><span id="answeredCount">0</span><small>Answered</small></div>
+        <div class="stat"><span id="prayerCount">0</span><small>Requests</small></div>
+      </div>
+
+      <article class="panel">
+        <h3>Mood Over Time</h3>
+        <canvas id="moodChart" width="340" height="190"></canvas>
+      </article>
+
+      <article class="panel">
+        <h3>Prevailing Themes</h3>
+        <div id="themeCloud" class="theme-cloud"></div>
+      </article>
+
+      <article class="panel">
+        <h3>Weekly Letter Back</h3>
+        <p class="muted">Creates a reflection from your latest 7 entries: recurring burdens, answered prayers, gratitude, and growth.</p>
+        <button id="weeklyBtn" class="primary">Generate Weekly Reflection</button>
+        <div id="weeklyReflection"></div>
+      </article>
+    </section>
+
+    <section id="prayers" class="view">
+      <article class="panel">
+        <h3>Prayer Board</h3>
+        <div id="requestsList"></div>
+      </article>
+
+      <article class="panel">
+        <h3>Answered Prayers</h3>
+        <div id="answeredList"></div>
+      </article>
+
+      <article class="panel">
+        <h3>Gratitude Garden</h3>
+        <div id="gratitudeList"></div>
+      </article>
+    </section>
+
+
+    <section id="support" class="view">
+      <article class="panel companion">
+        <p class="eyebrow">AI Support</p>
+        <h3>Gentle Companion</h3>
+        <p class="muted">Ask for comfort, a prayer, a reflection question, or a Bible verse suggestion. This prototype gives offline supportive responses. For real AI, connect this later to an API.</p>
+        <select id="supportType">
+          <option value="comfort">I need comfort</option>
+          <option value="prayer">Write a prayer for me</option>
+          <option value="verse">Suggest a verse</option>
+          <option value="reflection">Give me a reflection question</option>
+        </select>
+        <textarea id="supportText" rows="6" placeholder="What are you feeling or praying about?"></textarea>
+        <button id="supportBtn" class="primary">Receive Support</button>
+        <div id="supportResponse" class="support-response"></div>
+      </article>
+    </section>
+
+    <section id="settings" class="view">
+<article class="panel">
+        <h3>Privacy & Data</h3>
+        <button id="changeCodeBtn" class="secondary">Change Private Code</button>
+        <button id="exportJsonBtn" class="secondary">Backup Diary Data</button>
+        <label class="file-label">Restore Backup
+          <input id="importJsonInput" type="file" accept="application/json" />
+        </label>
+        <button id="exportPrintBtn" class="secondary">Export Printable “My Year with God”</button>
+        <button id="clearBtn" class="danger">Clear Local Diary Data</button>
+        <p class="muted">Your private diary is stored on this device/browser in this prototype. For a full DGroup version with mother account, member accounts, cloud sync, and secure AI support, this app should be connected to a protected database and authentication system.</p>
+      </article>
+
+      <article class="panel">
+        <h3>Roadmap to Absolute App</h3>
+        <ul class="roadmap">
+          <li>Secure user accounts and encrypted cloud sync</li>
+          <li>Real AI companion using a private backend</li>
+          <li>Push prayer reminders and weekly reflection notifications</li>
+          <li>Face ID / fingerprint through device passkeys</li>
+          <li>Export to PDF and yearly spiritual review book</li>
+        </ul>
+      </article>
+    </section>
+    <div class="bottom-next"><button id="prevViewBtn" class="secondary">Back</button><button id="nextViewBtn" class="primary">Next</button></div>
+  </main>
+
+  <script src="app.js"></script>
+</body>
+</html>

@@ -1,0 +1,25 @@
+{
+  "name": "Faith Journey DGroup",
+  "short_name": "Faith Journey",
+  "id": "/a-diary-between-me-and-god/",
+  "start_url": "./index.html",
+  "scope": "./",
+  "display": "standalone",
+  "orientation": "portrait",
+  "background_color": "#f7f2ea",
+  "theme_color": "#eadfcd",
+  "description": "Private diary, AI-assisted reflection, Gospel sharing, and DGroup discipleship monitoring with consent-based privacy.",
+  "icons": [
+    {
+      "src": "icon.svg",
+      "sizes": "any",
+      "type": "image/svg+xml",
+      "purpose": "any maskable"
+    }
+  ],
+  "categories": [
+    "lifestyle",
+    "productivity",
+    "books"
+  ]
+}
